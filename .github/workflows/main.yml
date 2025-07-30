@@ -1,0 +1,29 @@
+name: NPM Dev Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Change this to your desired Node.js version
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run development server
+        run: npm run dev
