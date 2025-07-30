@@ -3,21 +3,16 @@ import { mount } from 'enzyme';
 import LanguageCardFooter from '../src/comp/LanguageCardFooter';
 
 describe('LanguageCardFooter', () => {
-  it('toggles show on click', function() {
-    const wrap = mount(<LanguageCardFooter />);
-    let container = wrap.find('.language-card-footer--letter-picker-container');
-    let toggleElement = wrap.find('.language-card-footer--toggle-container');
-    expect(container.children().length).toBe(1);
-    toggleElement.simulate('click');
-    let firstClickContainer = wrap.find(
-      '.language-card-footer--letter-picker-container'
-    );
-    expect(firstClickContainer.children().length).toBe(2);
-    toggleElement.simulate('click');
-    let secondClickContainer = wrap.find(
-      '.language-card-footer--letter-picker-container'
-    );
+  it('displays word details and part of speech', () => {
+    const wrap = mount(<LanguageCardFooter wordDetails="detail" partOfSpeech="noun" />);
+    const text = wrap.text();
+    expect(text).toContain('detail');
+    expect(text).toContain('noun');
+  });
 
-    expect(secondClickContainer.children().length).toBe(1);
+  it('falls back to part of speech only when no details provided', () => {
+    const wrap = mount(<LanguageCardFooter partOfSpeech="verb" />);
+    const text = wrap.text();
+    expect(text).toContain('verb');
   });
 });

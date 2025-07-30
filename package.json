@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "next build",
+    "export": "next build && next export",
     "dev": "next",
     "start": "next start",
     "test": "jest",

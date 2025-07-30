@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import Lingvist from '../src/comp/lingvist';
+import Lingvist from '../src/comp/Lingvist';
 
 describe('lingvist page', () => {
   let wrap, instance;
