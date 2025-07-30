@@ -25,7 +25,7 @@ jobs:
 
       - name: Run tests
         run: npm test
-        # Uncomment the next line if you're using Jest and want serialized testing
+        # If using Jest:
         # run: npm test -- --runInBand
 
       - name: Build static site
@@ -33,17 +33,10 @@ jobs:
         env:
           NODE_OPTIONS: --openssl-legacy-provider
 
-      - name: Upload build output
-        uses: actions/upload-artifact@v3
-        with:
-          name: site
-          path: out
-
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main'
-        uses: s0/git-publish-subdir-action@v2
-        env:
-          REPO: self
-          BRANCH: gh-pages
-          FOLDER: out
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.ref == 'refs/heads/master'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./out
+          publish_branch: gh-pages
